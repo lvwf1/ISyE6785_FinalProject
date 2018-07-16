@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb1b801b-a386-4237-9d74-baa6b69b5fc7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/lstm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/_config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/command_prompt_result.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/index.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/snap.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/snap_command_prompt_result.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/snap_graph.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/stock-er/stock-er.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/Plots/linear.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/Plots/svr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/goog.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/linear.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/svm/svr.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LSTMRNNStockr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lstm.py" beforeDir="false" afterPath="$PROJECT_DIR$/lstm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tesla-stocks-prediction" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -35,8 +22,8 @@
       <file leaf-file-name="lstm.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lstm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="1" selection-start-column="1" selection-end-column="1" />
+            <state relative-caret-position="38">
+              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -81,6 +68,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -92,7 +80,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -189,7 +176,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20269479" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.3298184" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.3298184" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -211,6 +198,13 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/lstm.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lstm.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="48" selection-start-line="4" selection-start-column="48" selection-end-line="4" selection-end-column="48" />
         </state>
@@ -221,8 +215,8 @@
     <entry file="file://$PROJECT_DIR$/svm/svr.py" />
     <entry file="file://$PROJECT_DIR$/lstm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        <state relative-caret-position="38">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
         </state>
       </provider>
     </entry>
