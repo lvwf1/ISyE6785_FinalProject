@@ -100,14 +100,11 @@ bias_output_layer = tf.Variable(tf.zeros([1]))
 def LSTM_cell(input, output, state):
     input_gate = tf.sigmoid(tf.matmul(input, weights_input_gate) + tf.matmul(output, weights_input_hidden) + bias_input)
 
-    forget_gate = tf.sigmoid(
-        tf.matmul(input, weights_forget_gate) + tf.matmul(output, weights_forget_hidden) + bias_forget)
+    forget_gate = tf.sigmoid(tf.matmul(input, weights_forget_gate) + tf.matmul(output, weights_forget_hidden) + bias_forget)
 
-    output_gate = tf.sigmoid(
-        tf.matmul(input, weights_output_gate) + tf.matmul(output, weights_output_hidden) + bias_output)
+    output_gate = tf.sigmoid(tf.matmul(input, weights_output_gate) + tf.matmul(output, weights_output_hidden) + bias_output)
 
-    memory_cell = tf.tanh(
-        tf.matmul(input, weights_memory_cell) + tf.matmul(output, weights_memory_cell_hidden) + bias_memory_cell)
+    memory_cell = tf.tanh(tf.matmul(input, weights_memory_cell) + tf.matmul(output, weights_memory_cell_hidden) + bias_memory_cell)
 
     state = state * forget_gate + input_gate * memory_cell
 
