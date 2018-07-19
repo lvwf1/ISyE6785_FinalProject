@@ -8,9 +8,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-tesla_stocks = pd.read_csv('amaz_stocks.csv')
-tesla_stocks.head()
-data_to_use = tesla_stocks['Close'].values
+def stockpredict(stock):
+    return stock
+
+stocks = pd.read_csv('tesla_stocks.csv')
+stocks.head()
+data_to_use = stocks['Close'].values
+
+print(len(data_to_use))
 
 scaler = StandardScaler()
 scaled_data = scaler.fit_transform(data_to_use.reshape(-1, 1))
@@ -49,11 +54,13 @@ def window_data(data, window_size):
 
 X, y = window_data(scaled_data, 7)
 
-X_train  = np.array(X[:700])
-y_train = np.array(y[:700])
+test_index = 700
 
-X_test = np.array(X[700:])
-y_test = np.array(y[700:])
+X_train  = np.array(X[:test_index])
+y_train = np.array(y[:test_index])
+
+X_test = np.array(X[test_index:])
+y_test = np.array(y[test_index:])
 
 print("X_train size: {}".format(X_train.shape))
 print("y_train size: {}".format(y_train.shape))
@@ -99,15 +106,10 @@ bias_output_layer = tf.Variable(tf.zeros([1]))
 
 def LSTM_cell(input, output, state):
     input_gate = tf.sigmoid(tf.matmul(input, weights_input_gate) + tf.matmul(output, weights_input_hidden) + bias_input)
-
     forget_gate = tf.sigmoid(tf.matmul(input, weights_forget_gate) + tf.matmul(output, weights_forget_hidden) + bias_forget)
-
     output_gate = tf.sigmoid(tf.matmul(input, weights_output_gate) + tf.matmul(output, weights_output_hidden) + bias_output)
-
     memory_cell = tf.tanh(tf.matmul(input, weights_memory_cell) + tf.matmul(output, weights_memory_cell_hidden) + bias_memory_cell)
-
     state = state * forget_gate + input_gate * memory_cell
-
     output = output_gate * tf.tanh(state)
     return state, output
 
@@ -171,9 +173,9 @@ for i in range(len(tests)):
         tests_new.append(tests[i][0][j])
 
 test_results = []
-for i in range(749):
-    if i >= 701:
-        test_results.append(tests_new[i-701])
+for i in range(len(data_to_use)):
+    if i >= test_index:
+        test_results.append(tests_new[i-test_index])
     else:
         test_results.append(None)
 
