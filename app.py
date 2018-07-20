@@ -8,16 +8,17 @@ app = Flask(__name__)
 def index():
     list1 = list(range(10))
     my_list = [{"value": "Tesla"},
-               {"value": "Facebook"},
+               {"value": "BIDU"},
                {"value": "Amazon"},
                {"value": "Alibaba"},
                {"value": "Google"}]
     return render_template('index.html', title='hello world', my_list=my_list)
 
 
-@app.route("/predict", methods=['POST'])
+@app.route("/predict", methods=['GET','POST'])
 def predict():
-    return stockpredict(request.form.get('form-stock'))
+    stock = request.form.get('form-stock')
+    return stockpredict(stock)
 
 if __name__ == '__main__':
     app.run()

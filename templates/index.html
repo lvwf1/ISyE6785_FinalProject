@@ -71,22 +71,18 @@
         			</div>
         			
         			<div class="modal-body">
-        				
-	                    <form role="form" action="/predict" method="post" class="login-form">
-	                    	<div class="form-group">
-	                    		<label class="sr-only" for="form-username">Stock</label>
-	                        	<input type="text" name="form-stock" placeholder="Tesla..." class="form-username form-control" id="form-stock">
-	                        </div>
-	                        <button type="submit" class="btn" onclick="testclick()">Predict!</button>
-	                    </form>
+
+                        <div class="form-group">
+                            <label class="sr-only" for="form-username">Stock</label>
+                            <input type="text" name="form-stock" placeholder="Tesla..." class="form-username form-control">
+                        </div>
+                        <button type="submit" class="btn" id="predictbutton">Predict!</button>
 	                    
         			</div>
         			
         		</div>
         	</div>
         </div>
-
-
         <!-- Javascript -->
         <script src="../static/js/jquery-1.11.1.min.js"></script>
         <script src="../static/bootstrap/js/bootstrap.min.js"></script>
@@ -96,6 +92,19 @@
         <!--[if lt IE 10]>
             <script src="../static/js/placeholder.js"></script>
         <![endif]-->
+
+        <script>
+            $(function() {
+                $('#predictbutton').bind('click', function() {
+                 $.getJSON('/predict', {
+                        stock: $('input[name="form-stock"]').val(),
+                    }, function(data) {
+                        $("#result").text(data.result);
+                    });
+                    return false;
+                });
+            });
+        </script>
 
     </body>
 
