@@ -1,62 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>LSTM Stock Prediction</title>
-
         <!-- CSS -->
         <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="../static/font-awesome/css/font-awesome.min.css">
 		<link rel="stylesheet" href="../static/css/form-elements.css">
         <link rel="stylesheet" href="../static/css/style.css">
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
         <!-- Favicon and touch icons -->
         <link rel="shortcut icon" href="../static/ico/favicon.png">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/ico/apple-touch-icon-144-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="../static/ico/apple-touch-icon-57-precomposed.png">
-
     </head>
-
     <body>
-
         <!-- Content -->
         <div class="top-content">
-        	
             <div class="inner-bg">
                 <div class="container">
-                	
                     <div class="row">
                         <div class="col-sm-8 col-sm-offset-2 text">
-                        	<a class="logo" href="index.html"></a>
+                        	<a class="logo" href="/"></a>
                             <h1>LSTM Stock Prediction</h1>
                             <div class="top-big-link">
-                            	<a class="btn btn-link-1 launch-modal" href="#" data-modal-id="modal-login">Choose Stock</a>
+                            	 <a class="btn btn-link-1 launch-modal col-sm-12" href="#" data-modal-id="modal-login">Choose Stock to Predict</a>
+                                <a class="btn btn-link-1 launch-modal col-sm-12" href="#" data-modal-id="modal-login2">Calculate European Call Option Price</a>
+                                <a class="btn btn-link-1 launch-modal col-sm-12" href="#" data-modal-id="modal-login3">Calculate American Option Price</a>
                             </div>
+                            <ul class="col-sm-6">
+                                <label>European Call Option:</label>
+                                <li>DownAndIn:{{ downandin }}</li>
+                                <li>DownAndOut:{{ downandout }}</li>
+                            </ul>
+                            <ul class="col-sm-6">
+                                <label>American Option:</label>
+                                <li>American Call Option:{{ calloption }}</li>
+                                <li>American Put Option:{{ putoption }}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
         </div>
-        
         <!-- MODAL -->
         <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
         	<div class="modal-dialog">
         		<div class="modal-content">
-        			
         			<div class="modal-header">
         				<button type="button" class="close" data-dismiss="modal">
         					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
@@ -69,17 +68,83 @@
                                 {% endfor %}
                             </ul>
         			</div>
-        			
         			<div class="modal-body">
-
-                        <div class="form-group">
-                            <label class="sr-only" for="form-username">Stock</label>
-                            <input type="text" name="form-stock" placeholder="Tesla..." class="form-username form-control">
-                        </div>
-                        <button type="submit" class="btn" id="predictbutton">Predict!</button>
-	                    
+	                    <form role="form" action="/predict" method="post" class="login-form">
+	                    	<div class="form-group">
+	                    		<label class="sr-only" for="form-username">Stock</label>
+	                        	<input type="text" name="form-stock" placeholder="Choose One of Above Stocks..." class="form-username form-control" id="form-stock">
+	                        </div>
+	                        <button type="submit" class="btn">Predict!</button>
+	                    </form>
         			</div>
         			
+        		</div>
+        	</div>
+        </div>
+        <div class="modal fade" id="modal-login2" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">
+        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        				</button>
+        				<h3 class="modal-title" id="modal-login-label">Calculate European Call Option Price</h3>
+        				<p>We will implement Black-Scholes Method, Trinomial Tree Model or Adaptive Mesh Method to calculate European Call Option Price</p>
+        			</div>
+        			<div class="modal-body">
+	                    <form role="form" action="/european" method="post" class="login-form">
+	                    	<div class="form-group">
+                                <select name="euromethod" id="euromethod">
+                                    <option value ="bs">Black-Scholes Method</option>
+                                    <option value ="tt">Trinomial Tree Model</option>
+                                    <option value="amm">Adaptive Mesh Method</option>
+                                </select>
+	                        	 <input type="text" name="s" placeholder="S0..." class="form-control" id="s">
+	                        	 <input type="text" name="k" placeholder="K..." class="form-control" id="k">
+	                        	 <input type="text" name="rf" placeholder="rf..." class="form-control" id="rf">
+	                        	 <input type="text" name="divR" placeholder="divR..." class="form-control" id="divR">
+	                        	 <input type="text" name="sigma" placeholder="sigma..." class="form-control" id="sigma">
+	                        	 <input type="text" name="T" placeholder="T..." class="form-control" id="T">
+                                <input type="text" name="N" placeholder="N..." class="form-control" id="N" value="100">
+                                <input type="text" name="M" placeholder="M..." class="form-control" id="M" value="2">
+	                        	 <input type="text" name="H" placeholder="H..." class="form-control" id="H">
+	                        </div>
+	                        <button type="submit" class="btn">Calculate!</button>
+	                    </form>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        <div class="modal fade" id="modal-login3" tabindex="-1" role="dialog" aria-labelledby="modal-login-label" aria-hidden="true">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">
+        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        				</button>
+        				<h3 class="modal-title" id="modal-login-label">Calculate American Call Option Price</h3>
+        				<p>We will implement Black-Scholes Method or Monte Carlo Simulation to calculate American Option Price</p>
+        			</div>
+        			<div class="modal-body">
+	                    <form role="form" action="/american" method="post" class="login-form">
+	                    	<div class="form-group">
+                                <select name="americanmethod" id="americanmethod">
+                                    <option value ="mc">Monte Carlo Simulation</option>
+                                    <option value ="bs">Black-Scholes Method</option>
+                                </select>
+	                        	 <input type="text" name="s_a" placeholder="S0..." class="form-control" id="s_a">
+	                        	 <input type="text" name="k_a" placeholder="K..." class="form-control" id="k_a">
+	                        	 <input type="text" name="t_a" placeholder="T..." class="form-control" id="t_a">
+	                        	 <input type="text" name="m_a" placeholder="M..." class="form-control" id="m_a">
+	                        	 <input type="text" name="r_a" placeholder="divR..." class="form-control" id="r_a">
+	                        	 <input type="text" name="delta" placeholder="delta..." class="form-control" id="delta">
+                                <input type="text" name="sigma_a" placeholder="sigma..." class="form-control" id="sigma_a">
+                                <input type="text" name="i" placeholder="i..." class="form-control" id="i">
+	                        	 <input type="text" name="seed" placeholder="seed..." class="form-control" id="seed">
+	                        </div>
+	                        <button type="submit" class="btn">Calculate!</button>
+	                    </form>
+        			</div>
         		</div>
         	</div>
         </div>
@@ -88,24 +153,8 @@
         <script src="../static/bootstrap/js/bootstrap.min.js"></script>
         <script src="../static/js/jquery.backstretch.min.js"></script>
         <script src="../static/js/scripts.js"></script>
-        
         <!--[if lt IE 10]>
             <script src="../static/js/placeholder.js"></script>
         <![endif]-->
-
-        <script>
-            $(function() {
-                $('#predictbutton').bind('click', function() {
-                 $.getJSON('/predict', {
-                        stock: $('input[name="form-stock"]').val(),
-                    }, function(data) {
-                        $("#result").text(data.result);
-                    });
-                    return false;
-                });
-            });
-        </script>
-
     </body>
-
 </html>

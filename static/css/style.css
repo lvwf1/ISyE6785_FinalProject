@@ -40,7 +40,7 @@ img { max-width: 100%; }
 .btn-link-1 {
 	display: inline-block;
 	height: 50px;
-	margin: 0 5px;
+	margin: 5px;
 	padding: 16px 20px 0 20px;
 	background: #399599;
 	font-size: 16px;
